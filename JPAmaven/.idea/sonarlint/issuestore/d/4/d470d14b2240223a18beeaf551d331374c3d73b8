@@ -1,0 +1,22 @@
+
+f	java:S114"QRename this interface name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¾µ©
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(çƒ‡Ëúÿÿÿÿ
+o	java:S115	"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(«åÙå
+T
+java:S1854"9Remove this useless assignment to local variable "idade".(÷Ó÷Áúÿÿÿÿ
+S
+java:S1854"8Remove this useless assignment to local variable "nome".(º¤‡öúÿÿÿÿ
+L
+java:S2696"6Make the enclosing method "static" or remove this set.(÷¥Æ
+K
+java:S2209"5Change this instance-reference to a static reference.(÷¥Æ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(¨§º³ùÿÿÿÿ
+R
+java:S1117"7Rename "nome" which hides the field declared at line 7.(º¤‡öúÿÿÿÿ
+D
+java:S1481")Remove this unused "nome" local variable.(º¤‡öúÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(ßÍöúÿÿÿÿ
+S
+java:S1117"8Rename "idade" which hides the field declared at line 9.(÷Ó÷Áúÿÿÿÿ
+E
+java:S1481"*Remove this unused "idade" local variable.(÷Ó÷Áúÿÿÿÿ
