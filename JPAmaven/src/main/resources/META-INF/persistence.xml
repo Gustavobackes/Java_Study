@@ -18,6 +18,9 @@
 
             <!-- https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/dialect/package-summary.html -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL10Dialect"/>
+
+            <property name="hibernate.show_sql" value="true" /> <!-- Show SQL in console -->
+            <property name="hibernate.format_sql" value="true" /> <!-- Show SQL formatted -->
         </properties>
     </persistence-unit>
 </persistence>
