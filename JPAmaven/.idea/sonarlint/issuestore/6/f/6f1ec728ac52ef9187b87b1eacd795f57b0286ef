@@ -1,7 +1,0 @@
-
-S
-java:S1854"6Remove this useless assignment to local variable "p1".(ÀÛ¶ü8Ÿ¯»Ôœ0
-D
-java:S1481"'Remove this unused "p1" local variable.(ÀÛ¶ü8¦¯»Ôœ0
-Z	java:S106"9Replace this use of System.out or System.err by a logger.(¬ÜÈúûÿÿÿÿ8¦¯»Ôœ0
-T	java:S106!"9Replace this use of System.out or System.err by a logger.(§–¼	8¨¯»Ôœ0

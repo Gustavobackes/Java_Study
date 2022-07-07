@@ -11,19 +11,15 @@ import javax.persistence.Persistence;
 
 public class Main {
     public static void main(String[] args) {
-        Crud cria = new Crud();
+        Crud crud = new Crud();
 
+        Pessoa pes2 = new Pessoa(null, "Gustavoteste", 90);
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
-        EntityManager em = emf.createEntityManager();
+           crud.criar(pes2);
+           crud.excluir(3);
 
-        Pessoa p2 = em.find(Pessoa.class, 2);
-        System.out.println(p2);
-
-        cria.criar(p2);
 
         System.out.println("Finish!");
-        em.close();
-        emf.close();
+        crud.closeConnection();
     }
 }

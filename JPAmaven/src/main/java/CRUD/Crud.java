@@ -1,5 +1,7 @@
 package CRUD;
 
+import dominio.Pessoa;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,4 +15,16 @@ public class Crud {
         em.persist(p);
         em.getTransaction().commit();
     }
+    public void excluir(int num){
+        Pessoa p = em.find(Pessoa.class, num);
+        em.getTransaction().begin();
+        em.remove(p);
+        em.getTransaction().commit();
+    }
+
+    public void closeConnection(){
+        em.close();
+        emf.close();
+    }
+
 }
