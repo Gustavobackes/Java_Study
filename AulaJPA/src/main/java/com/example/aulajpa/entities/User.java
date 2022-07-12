@@ -12,7 +12,6 @@ public class User {
     private String email;
     private Double salary;
 
-
     public User() {
     }
 
