@@ -1,5 +1,6 @@
 package com.example.projetojpa.entities;
 
+import com.example.projetojpa.dtos.JogadorDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,4 +18,10 @@ public class Jogador {
     private String email;
     private Double score;
 
+    public Jogador(JogadorDto jogadorDto) {
+        this.id = jogadorDto.getId();
+        this.name = jogadorDto.getName();
+        this.email = jogadorDto.getEmail();
+        this.score = jogadorDto.getScore();
+    }
 }

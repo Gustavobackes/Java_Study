@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 public class JogadorDto {
     private Long id;
     private String name;
+
+    private String email;
     private Double score;
 
     public JogadorDto(Jogador jogador){

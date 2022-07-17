@@ -5,5 +5,7 @@ spring:
     password: postgres
   jpa:
     show-sql: true
-    hibernate:
-      ddl-auto: create
+    properties:
+      hibernate:
+        ddl-auto: create
+        dialect: org.hibernate.dialect.PostgreSQLDialect
