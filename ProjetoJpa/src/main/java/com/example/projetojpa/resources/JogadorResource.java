@@ -1,6 +1,7 @@
 package com.example.projetojpa.resources;
 
 import com.example.projetojpa.dtos.JogadorDto;
+import com.example.projetojpa.dtos.JogadorDto2;
 import com.example.projetojpa.services.JogadorService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,21 +32,22 @@ public class JogadorResource {
     }
 
     @GetMapping("/{jogadorId}")
-    public Optional<JogadorDto> getJogador(@PathVariable("jogadorId")Long jogadorId){
+    public Optional<JogadorDto2> getJogador(@PathVariable("jogadorId")Long jogadorId){
         return service.getJogador(jogadorId);
     }
 
-    @PostMapping
-    public ResponseEntity<Object> registerNewJogador(@RequestBody JogadorDto jogadorDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.newJogador(jogadorDto));
+    @PostMapping("/post")
+    public ResponseEntity<Object> registerNewJogador(@RequestBody JogadorDto2 jogadorDto2){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.newJogador(jogadorDto2));
     }
 
-
-
-
-    @DeleteMapping("jogadorId")
-    public ResponseEntity<Object> DeletJogador (@PathVariable("jogadorId") Long jogadorId){
+    @DeleteMapping("{jogadorId}")
+    public ResponseEntity<Object> deleteJogador (@PathVariable("jogadorId") Long jogadorId){
         service.deleteJogador(jogadorId);
         return ResponseEntity.status(HttpStatus.OK).body("Jogador com ID" + jogadorId + "foi deletado!");
+    }
+    @PutMapping("/put/{jogadorId}")
+    public ResponseEntity<Object> updateJogador (@PathVariable("jogadorId") Long jogadorId, @RequestBody JogadorDto2 jogadorDto2){
+        return ResponseEntity.status(HttpStatus.OK).body(service.updateJogador(jogadorId, jogadorDto2));
     }
 }
