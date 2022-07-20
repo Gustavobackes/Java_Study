@@ -6,13 +6,10 @@ import com.example.projetojpa.entities.Jogador;
 import com.example.projetojpa.repositories.Repository;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.modelmapper.ModelMapper;
-import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.Optional;
 
