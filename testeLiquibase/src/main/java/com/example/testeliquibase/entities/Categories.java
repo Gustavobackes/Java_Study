@@ -21,7 +21,7 @@ public class Categories {
     @Column
     private String tipo;
     @Column
-    private int popularidade;
+    private Integer popularidade;
 
     @ManyToMany(mappedBy = "categories")
     private List<Products> products;

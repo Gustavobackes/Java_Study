@@ -1,24 +1,24 @@
 package com.example.testeliquibase.dtos;
 
+import com.example.testeliquibase.entities.Categories;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CategoriesDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private Long id;
-    @Column
     private String tipo;
-    @Column
-    private int popularidade;
+    private Integer popularidade;
+    private List<ProductsDto> productsDtos;
+
+    public CategoriesDto(Categories categories) {
+        id = categories.getId();
+        tipo = categories.getTipo();
+        popularidade = categories.getPopularidade();
+    }
 }
