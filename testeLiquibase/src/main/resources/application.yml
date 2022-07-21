@@ -12,3 +12,5 @@ spring:
   liquibase:
     changeLog: liquibase/master.xml
     enabled: true
+  main:
+    allow-bean-definition-overriding: true

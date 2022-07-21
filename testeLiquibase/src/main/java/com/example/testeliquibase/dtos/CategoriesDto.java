@@ -14,6 +14,7 @@ public class CategoriesDto {
     private Long id;
     private String tipo;
     private Integer popularidade;
+
     private List<ProductsDto> productsDtos;
 
     public CategoriesDto(Categories categories) {

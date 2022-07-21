@@ -2,6 +2,8 @@ package com.example.testeliquibase.resources;
 
 import com.example.testeliquibase.dtos.ProductsDto;
 import com.example.testeliquibase.services.ProductsService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,11 @@ public class ProductsResource {
     }
 
     @GetMapping
-    public ResponseEntity<Object> getAll() {
-        return ResponseEntity.ok(service.getAllProducts());
+    public ResponseEntity<Object> getAll(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "size", defaultValue = "10") Integer size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return service.getAllProducts(pageRequest);
     }
 
     @GetMapping("{productId}")
