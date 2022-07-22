@@ -6,10 +6,8 @@ import com.example.testeliquibase.produtoInterface.CategoriesInterface;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.expression.spel.ast.OpAnd;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -49,15 +47,23 @@ public class CategoriesService {
     }
 
     public ResponseEntity<Object> updateById(Long categorieId, CategoriesDto categoriesDto) {
+        Optional<Categories> categories = repository.findById(categorieId);
+        if (categories.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("categoria com id " + categorieId + " não existe!");
+        }
+
+        categories.get().setTipo(categoriesDto.getTipo());
+        categories.get().setPopularidade(categoriesDto.getPopularidade());
+        repository.save(categories.get());
+        return ResponseEntity.status(HttpStatus.OK).body(categories);
+    }
+
+    public ResponseEntity<Object> getCategorieById(Long categorieId) {
         boolean exist = repository.existsById(categorieId);
         if (!exist) {
-            throw new IllegalStateException("categoria com id " + categorieId + " não existe!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("categoria com id " + categorieId + " não existe!");
         }
-        Categories categories = repository.findById(categorieId)
-                .orElseThrow(() -> new IllegalStateException("Jogador com id " + categorieId + " não existe!"));
-
-            categories.setTipo(categoriesDto.getTipo());
-        categories.setPopularidade(categoriesDto.getPopularidade());
-return ResponseEntity.status(HttpStatus.OK).body(categories);
+        Optional<Object> categories = repository.findById(categorieId).map(this::toCategoriesDto);
+        return ResponseEntity.status(HttpStatus.OK).body(categories);
     }
 }

@@ -46,7 +46,6 @@ public class JogadorService {
         return jogadorDto2;
     }
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     public void deleteJogador(Long JogadorId) {
         boolean exists = repository.existsById(JogadorId);
         if (!exists) {
