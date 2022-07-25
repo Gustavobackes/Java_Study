@@ -10,9 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CategoriesService {
     private final CategoriesInterface repository;
     private final ModelMapper modelMapper;
@@ -26,24 +28,23 @@ public class CategoriesService {
         return modelMapper.map(categories, CategoriesDto.class);
     }
 
-
     public ResponseEntity<Object> getAllCategories(PageRequest pageRequest) {
         Page<Object> page = repository.findAll(pageRequest).map(this::toCategoriesDto);
         return ResponseEntity.ok(page);
     }
 
+    public ResponseEntity<Object> getCategorieById(Long categorieId) {
+        boolean exist = repository.existsById(categorieId);
+        if (!exist) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("categoria com id " + categorieId + " não existe!");
+        }
+        Optional<Object> categories = repository.findById(categorieId).map(this::toCategoriesDto);
+        return ResponseEntity.status(HttpStatus.OK).body(categories);
+    }
+
     public ResponseEntity<Object> postNewCategorie(CategoriesDto categoriesDto) {
         Categories categories = new Categories(categoriesDto);
         return ResponseEntity.ok(repository.save(categories));
-    }
-
-    public ResponseEntity<Object> deleteById(Long categorieId) {
-        boolean exist = repository.existsById(categorieId);
-        if (!exist) {
-            throw new IllegalStateException("categoria com id " + categorieId + " não existe!");
-        }
-        repository.deleteById(categorieId);
-        return ResponseEntity.status(HttpStatus.OK).body("categoria de id " + categorieId + " foi deletado!");
     }
 
     public ResponseEntity<Object> updateById(Long categorieId, CategoriesDto categoriesDto) {
@@ -58,12 +59,14 @@ public class CategoriesService {
         return ResponseEntity.status(HttpStatus.OK).body(categories);
     }
 
-    public ResponseEntity<Object> getCategorieById(Long categorieId) {
+    public ResponseEntity<Object> deleteById(Long categorieId) {
         boolean exist = repository.existsById(categorieId);
         if (!exist) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("categoria com id " + categorieId + " não existe!");
+            throw new IllegalStateException("categoria com id " + categorieId + " não existe!");
         }
-        Optional<Object> categories = repository.findById(categorieId).map(this::toCategoriesDto);
-        return ResponseEntity.status(HttpStatus.OK).body(categories);
+        repository.deleteById(categorieId);
+        return ResponseEntity.status(HttpStatus.OK).body("categoria de id " + categorieId + " foi deletado!");
     }
+
+
 }
