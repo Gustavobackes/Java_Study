@@ -1,59 +1,37 @@
 package com.example.projetojpa.entities;
 
+import com.example.projetojpa.dtos.JogadorDto;
+import com.example.projetojpa.dtos.JogadorDto2;
+import lombok.*;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tb_players")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "Jogadores")
 public class Jogador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    String email;
-    Double score;
+    @Column
+    private Long id;
+    @Column
+    private String name;
+    @Column
+    private String email;
+    @Column
+    private Double score;
 
 
-
-    public Jogador(Long id, String name, String email, Double score) {
-        super();
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.score = score;
+    public Jogador(JogadorDto2 jogadorDto2) {
+        name = jogadorDto2.getName();
+        email = jogadorDto2.getEmail();
+        score = jogadorDto2.getScore();
     }
 
-   public Jogador(){
-   }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Double getScore() {
-        return score;
-    }
-
-    public void setScore(Double score) {
-        this.score = score;
+    public Jogador(JogadorDto jogadorDto) {
+        name = jogadorDto.getName();
+        score = jogadorDto.getScore();
     }
 }
