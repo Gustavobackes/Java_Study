@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.HTMLDocument;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
@@ -37,12 +38,12 @@ public class ProductsService {
     }
 
     public ResponseEntity<Object> getProductById(Long productId) {
-        boolean exist = repository.existsById(productId);
-        if (!exist) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto com id " + productId + " não existe!");
-        }
         Optional<ProductsDto> productsDto = repository.findById(productId).map(this::toProductDto);
-        return ResponseEntity.status(HttpStatus.OK).body(productsDto);
+        if (!productsDto.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto com id " + productId + " não existe!");
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(productsDto);
+        }
     }
 
     @Transactional
@@ -51,7 +52,7 @@ public class ProductsService {
         return repository.save(products);
     }
 
-    public ResponseEntity<Object> deleteProduct(Long productId){
+    public ResponseEntity<Object> deleteProduct(Long productId) {
         boolean exist = repository.existsById(productId);
         if (!exist) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Produto com id " + productId + " não existe!");
